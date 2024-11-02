@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="text-center">
+    <h1>Welcome to Django Delights</h1>
+    <p class="lead">Your one-stop solution for managing restaurant inventory and sales with ease.</p>
+    <p>Streamline your workflow, keep track of your ingredients, and manage menu items and purchases—all in one place.</p>
+
+    <div class="mt-4">
+      <a href="{% url 'ingredient_list' %}" class="btn btn-primary">View Ingredients</a>
+      <a href="{% url 'menu_item_list' %}" class="btn btn-secondary">View Menu Items</a>
+      <a href="{% url 'record_purchase' %}" class="btn btn-outline-primary">Record a Purchase</a>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <h2>Features</h2>
+    <ul class="list-group">
+      <li class="list-group-item">Add and manage ingredients seamlessly</li>
+      <li class="list-group-item">Create and customize menu items with specific ingredients</li>
+      <li class="list-group-item">Record purchases and track inventory usage in real-time</li>
+      <li class="list-group-item">View detailed purchase history and analyze data</li>
+    </ul>
+  </div>
+
+  <div class="mt-5 text-center">
+    <h3>Start managing your restaurant today!</h3>
+    <p>Log in or sign up to access your dashboard and take control of your inventory.</p>
+    <a href="{% url 'signup' %}" class="btn btn-success">Sign Up Now</a>
+  </div>
+{% endblock %}

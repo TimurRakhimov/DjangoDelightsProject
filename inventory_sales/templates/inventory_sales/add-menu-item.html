@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Add New Menu Item</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ menu_item_form.as_p }}
+
+    <h3>Recipe Requirements</h3>
+    <div id="recipe-requirements">
+      <div class="ingredient-row">
+        <label for="ingredient">Ingredient:</label>
+        <select name="ingredient">
+          {% for ingredient in ingredients %}
+            <option value="{{ ingredient.id }}">{{ ingredient.product_name }}</option>
+          {% endfor %}
+        </select>
+        <label for="quantity_required">Quantity Required:</label>
+        <input type="number" step="0.01" name="quantity_required" min="0" required>
+        <button type="button" class="remove-ingredient btn btn-danger">Remove</button>
+      </div>
+    </div>
+    <button type="button" id="add-ingredient" class="btn btn-secondary">Add Another Ingredient</button>
+    <br><br>
+    <button type="submit" class="btn btn-primary">Add Menu Item</button>
+  </form>
+
+  <script>
+    // Function to add a new ingredient row
+    document.getElementById('add-ingredient').addEventListener('click', function() {
+      const container = document.getElementById('recipe-requirements');
+      const newIngredientRow = document.querySelector('.ingredient-row').cloneNode(true);
+      newIngredientRow.querySelector('input').value = ''; // Clear input value
+      container.appendChild(newIngredientRow);
+    });
+
+    // Function to remove an ingredient row
+    document.getElementById('recipe-requirements').addEventListener('click', function(event) {
+      if (event.target.classList.contains('remove-ingredient')) {
+        const ingredientRow = event.target.closest('.ingredient-row');
+        if (document.querySelectorAll('.ingredient-row').length > 1) {
+          ingredientRow.remove();
+        } else {
+          alert('You must have at least one ingredient.');
+        }
+      }
+    });
+  </script>
+{% endblock %}
